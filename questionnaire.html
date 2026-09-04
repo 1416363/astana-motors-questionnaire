@@ -98,17 +98,7 @@
    });
  }
  var ПРИЁМНИК="https://script.google.com/macros/s/AKfycbx-SuVmX-KgWlzlZd80C04biG8jRFQN9s8IhFesHk_XJoASak3lPXU1A61BZLxmEVvI/exec";
- var метка=null, таймер=null;
- function чья(){
-   try{ метка=localStorage.getItem("amq-кто"); }catch(e){}
-   if(!метка){
-     var д=new Date(), дв=function(ч){return (ч<10?"0":"")+ч;};
-     метка=д.getFullYear()+"-"+дв(д.getMonth()+1)+"-"+дв(д.getDate())+" "+дв(д.getHours())+":"+дв(д.getMinutes())
-           +" "+Math.random().toString(36).slice(2,6);
-     try{ localStorage.setItem("amq-кто",метка); }catch(e){}
-   }
-   return метка;
- }
+ var таймер=null;
  function собрать(){
    var о=[];
    БЛОКИ.forEach(function(б,i){
@@ -126,7 +116,7 @@
  }
  function отправить(){
    fetch(ПРИЁМНИК,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
-     body:JSON.stringify({кто:чья(), ответы:собрать()})})
+     body:JSON.stringify({ответы:собрать()})})
     .then(function(о){return о.json();})
     .then(function(р){ беда(!(р&&р.ок)); })
     .catch(function(){ беда(true); });
