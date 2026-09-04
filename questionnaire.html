@@ -47,7 +47,8 @@
  <p class="super">mastakey systems + raft</p>
  <h1>Автоматизация кол-центра Astana Motors</h1>
  <p class="sub">Вопросник для определения условий задачи</p>
- <div class="layout">
+ <div id="amq-беда" style="display:none;background:#FBEAEA;color:#7A2E2E;padding:10px 14px;border-radius:6px;margin-bottom:16px">Ответы сейчас не сохраняются. Проверьте связь — как только она появится, сохранение продолжится само.</div>
+<div class="layout">
   <nav id="amq-toc"><h3>Оглавление</h3></nav>
   <main id="amq-main"></main>
  </div>
@@ -81,7 +82,7 @@
        var ключ=б.id+".в"+n, ans=э("div"), ta=э("textarea");
        ta.rows=1; ta.placeholder="Ответ"; ta.dataset.k=ключ;
        ta.value=(ключ in сост)?сост[ключ]:(п[1]||"");
-       ta.addEventListener("input",function(){подогнать(ta); сост[ключ]=ta.value; сохранить(); счёт();});
+       п[2]=n; ta.addEventListener("input",function(){подогнать(ta); сост[ключ]=ta.value; сохранить(); счёт(); отложить();});
        ans.appendChild(ta); r.appendChild(ans); s.appendChild(r);
      });
      main.appendChild(s);
@@ -96,6 +97,41 @@
      п.a.className=(г===поля.length&&поля.length)?"full":"";
    });
  }
+ var ПРИЁМНИК="https://script.google.com/macros/s/AKfycbx-SuVmX-KgWlzlZd80C04biG8jRFQN9s8IhFesHk_XJoASak3lPXU1A61BZLxmEVvI/exec";
+ var метка=null, таймер=null;
+ function чья(){
+   try{ метка=localStorage.getItem("amq-кто"); }catch(e){}
+   if(!метка){
+     var д=new Date(), дв=function(ч){return (ч<10?"0":"")+ч;};
+     метка=д.getFullYear()+"-"+дв(д.getMonth()+1)+"-"+дв(д.getDate())+" "+дв(д.getHours())+":"+дв(д.getMinutes())
+           +" "+Math.random().toString(36).slice(2,6);
+     try{ localStorage.setItem("amq-кто",метка); }catch(e){}
+   }
+   return метка;
+ }
+ function собрать(){
+   var о=[];
+   БЛОКИ.forEach(function(б,i){
+     var н=(i+1)+". "+б.h;
+     б.вопросы.forEach(function(п,j){
+       var поле=document.querySelector('.amq [data-k="'+б.id+'.в'+п[2]+'"]');
+       о.push({глава:н, вопрос:п[0], ответ:поле?поле.value:""});
+     });
+   });
+   return о;
+ }
+ function беда(есть){
+   var э2=document.getElementById("amq-беда");
+   if(э2) э2.style.display = есть ? "block" : "none";
+ }
+ function отправить(){
+   fetch(ПРИЁМНИК,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},
+     body:JSON.stringify({кто:чья(), ответы:собрать()})})
+    .then(function(о){return о.json();})
+    .then(function(р){ беда(!(р&&р.ок)); })
+    .catch(function(){ беда(true); });
+ }
+ function отложить(){ clearTimeout(таймер); таймер=setTimeout(отправить,1500); }
  загрузить(); отрисовать(); счёт();
  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){
    [].forEach.call(document.querySelectorAll(".amq textarea"),подогнать);});
