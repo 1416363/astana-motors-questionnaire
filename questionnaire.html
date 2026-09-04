@@ -67,11 +67,12 @@
  function загрузить(){ try{сост=JSON.parse(localStorage.getItem("amq")||"{}");}catch(e){сост={};} }
  function отрисовать(){
    var main=document.getElementById("amq-main"), toc=document.getElementById("amq-toc");
-   БЛОКИ.forEach(function(б){
+   БЛОКИ.forEach(function(б,ном_гл){
+     var н=(ном_гл+1)+". ";
      var a=э("a"); a.href="#"+б.id;
-     a.appendChild(э("span",null,б.h)); a.appendChild(э("span","cnt",""));
+     a.appendChild(э("span",null,н+б.h)); a.appendChild(э("span","cnt",""));
      toc.appendChild(a); ссылки.push({б:б,a:a});
-     var s=э("section"); s.id=б.id; s.appendChild(э("h2",null,б.h));
+     var s=э("section"); s.id=б.id; s.appendChild(э("h2",null,н+б.h));
      var hd=э("div","hdr"); hd.appendChild(э("span",null,"Вопрос")); hd.appendChild(э("span",null,"Ответ")); s.appendChild(hd);
      б.вопросы.forEach(function(п){
        var n=++ном, r=э("div","row"), ask=э("div","ask");
