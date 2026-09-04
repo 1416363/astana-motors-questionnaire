@@ -1,0 +1,104 @@
+<title>Опросник Astana Motors</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+<style>
+.amq{--bg:#FFFFFF;--ink:#111111;--ink-2:#5B5B58;--ink-3:#8E8E8B;
+ --rule:#E8E7E4;--hover:#EFEEEB;--field:#F5F5F3;--line:#E0DFDC;
+ --accent:#2E7CC4;--done:#3E7A5C;
+ background:var(--bg);color:var(--ink);
+ font-family:"Google Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+ max-width:1100px;margin:0 auto;padding:56px 24px 120px;box-sizing:border-box}
+.amq *{box-sizing:border-box}
+.amq .super{font-size:13px;color:var(--ink-3);margin:0 0 24px}
+.amq h1{font-weight:700;font-size:38px;line-height:1.15;margin:0;letter-spacing:-.02em;color:var(--ink)}
+.amq .sub{font-size:16px;color:var(--ink-2);margin:10px 0 0}
+.amq .layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:52px;align-items:start;margin-top:40px}
+@media (max-width:900px){.amq .layout{grid-template-columns:1fr;gap:28px}}
+.amq nav{position:sticky;top:20px;display:flex;flex-direction:column}
+@media (max-width:900px){.amq nav{position:static}}
+.amq nav h3{font-size:15px;font-weight:700;color:#000;margin:0 0 12px;padding:0 8px}
+.amq nav a{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:baseline;
+ padding:7px 8px;border-radius:4px;text-decoration:none;color:var(--ink-2);font-size:13.5px}
+.amq nav a:hover{background:var(--hover)}
+.amq nav .cnt{font-size:12px;color:var(--ink-3)}
+.amq nav a.full .cnt{color:var(--done)}
+.amq section{margin:0 0 56px;scroll-margin-top:20px}
+.amq h2{font-weight:700;font-size:23px;margin:0 0 16px;letter-spacing:-.01em;color:var(--ink)}
+.amq .hdr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:26px;
+ padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.amq .hdr span{font-size:12px;font-weight:500;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
+@media (max-width:760px){.amq .hdr{display:none}}
+.amq .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:26px;
+ border-bottom:1px solid var(--rule);padding:13px 0;align-items:start}
+@media (max-width:760px){.amq .row{grid-template-columns:1fr;gap:8px}}
+.amq .ask{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px}
+.amq .n{font-size:12.5px;color:var(--ink-3);padding-top:3px}
+.amq .ask p{margin:0}
+.amq textarea{display:block;width:100%;min-height:32px;resize:none;overflow:hidden;
+ font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);
+ border-radius:4px;padding:5px 8px}
+.amq textarea:hover{background:var(--hover)}
+.amq textarea:focus{outline:none;border-color:var(--accent);background:var(--bg)}
+.amq textarea::placeholder{color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){.amq *{transition:none!important}}
+</style>
+
+<div class="amq">
+ <p class="super">mastakey systems + raft</p>
+ <h1>Автоматизация кол-центра Astana Motors</h1>
+ <p class="sub">Вопросник для определения условий задачи</p>
+ <div class="layout">
+  <nav id="amq-toc"><h3>Оглавление</h3></nav>
+  <main id="amq-main"></main>
+ </div>
+</div>
+
+<script>
+(function(){
+ var БЛОКИ = [{"id": "b1", "h": "Перечень тем обращений", "вопросы": [["Какие категории обращений заведены в системе и сколько обращений пришлось на каждую за последние 12 месяцев?", "Единая точка входа для всего холдинга: покупка авто, запись на сервис, акции, трудоустройство, музей (в том числе приём картин в дар), логистика до завода, предложения о сотрудничестве. Разбивку примерно 4 000 обращений, не разложенных по категориям, обещали прислать по брифу."], ["Сколько обращений приходит в месяц и какая доля из них — жалобы?", "Более 10 000 в месяц. Из них 6 000 регистрируются как жалоба и приходят письменно. Остальные примерно 4 000 по категориям не разложены."], ["Ведутся ли записи разговоров, за какой период хранятся и можно ли их выгрузить?", ""], ["По каким каналам приходят обращения — телефон, форма на сайте, Instagram-директ, Telegram, WhatsApp?", "Телефон — единый номер холдинга, звонок принимается прямо в системе. Instagram-директ трёх профилей: Astana Motors, музей, общий; там работают боты быстрых ответов."], ["Какая доля обращений идёт на казахском языке — отдельно по телефону и письменно?", ""]]}, {"id": "b2", "h": "Откуда берётся ответ", "вопросы": [["Где хранятся комплектации, цены, условия кредитования и акции?", "В PDF-брошюрах дистрибьюторов, до публикации на сайт. Кол-центр сверяется по ним вручную. Брошюры могут отличаться по дилерским центрам, обновляются вручную, единого администратора нет."], ["Откуда берётся ответ по остальным темам — документ, система, страница сайта, память сотрудника?", ""], ["Кто отвечает за свежесть каждого источника?", ""], ["Как часто меняется каждый из этих источников?", ""], ["К каким источникам есть машинный доступ, а какие читаются только глазами?", ""], ["Какая система используется в кол-центре?", "Creation. Кол-центр работает только через неё: приём звонка с гарнитуры прямо из CRM, формирование и маршрутизация заявки в профильную организацию."], ["Она готовая, доработанная или своя?", ""], ["Что ещё сотрудник открывает в момент разговора?", ""], ["Сколько центров в сети и как устроены их сайты?", "Около 30 системных и более 150 внесистемных. Сайты на едином шаблоне дистрибьютора, отличается только название."], ["Числятся ли автомобили внесистемных центров на балансе и видны ли они в системе?", "Да. Автомобили внесистемных дилеров числятся на балансе Astana Motors и есть в её системе — то есть внесистемные дилеры отчасти интегрированы в инфраструктуру."]]}, {"id": "b3", "h": "Заявка и системы", "вопросы": [["Может ли кол-центр записать клиента на сервис?", "Нет. Не видит загрузку цеха и расписание. Может подсказать контакты или передать заявку."], ["Какие обращения доводятся до конца, а какие только передаются дальше?", "Заявка формируется и маршрутизируется в профильную организацию. Запись на сервис кол-центр довести до конца не может."], ["Какие действия по заявке совершаются вне Creation и в каких системах?", ""], ["Есть ли у системы вход для внешних программ и в каком объёме?", ""], ["Через что принимаются звонки и как это связано с системой?", "Звонок принимается с гарнитуры прямо в системе Creation, там же формируется заявка и уходит в профильную организацию."], ["Можно ли встроить новое прямо в систему или нужен отдельный слой?", ""]]}, {"id": "b3s", "h": "Соцсети и сайт", "вопросы": [["Кто ведёт соцсети и какие именно?", "Кол-центр. Instagram Astana Motors, Instagram музея, общий профиль. В директе работают боты быстрых ответов. На сайте указаны также Telegram-канал AstanaMotorsKz, Facebook и YouTube."], ["Кто отвечает в директе по каждому профилю — одна команда или разные?", ""], ["Кто доводит до конца обращения из соцсетей?", ""], ["Куда попадают обращения с формы «Обратная связь» на сайте и кто их разбирает?", ""], ["Кто ведёт Telegram-канал, Facebook и YouTube и приходят ли туда обращения клиентов?", ""]]}, {"id": "b4", "h": "Когда разговор уходит человеку", "вопросы": [["Какие обращения переводятся на человека немедленно, без попытки ответить?", ""], ["Кто со стороны компании отвечает за работу кол-центра и принимает по ней решения?", ""], ["Видит ли сотрудник историю клиента из других каналов?", ""], ["Должен ли ответ приходить на языке обращения?", ""]]}, {"id": "b5", "h": "Цифры сегодняшнего дня", "вопросы": [["Сколько сотрудников на линии сейчас?", "Шесть. Доступных линий больше."], ["Сколько минут занимает одно обращение — по каждой теме?", ""], ["Какая доля обращений решается сразу, без повторного обращения?", ""], ["Сколько звонков в сутки — среднее и максимум?", ""], ["Сколько звонков идёт одновременно в пике, в какие часы и дни?", ""], ["Сколько времени клиент ждёт на линии и какая доля не дожидается?", ""], ["Во сколько обходится обработка одного обращения? Если такой цифры нет — каков фонд оплаты и число обращений за тот же период?", ""]]}, {"id": "b5r", "h": "Рамки первого этапа", "вопросы": [["Какую долю обращений вы хотите закрывать без человека?", ""], ["Что вы засчитаете за успех пилота — в цифрах?", ""], ["Внедрять поэтапно — с обкаткой на отдельном участке — или закрывать всё сразу?", ""], ["Строить ли взаимодействие вокруг единой системы как главного распорядителя?", ""], ["До каких величин закладываться, чтобы решение окупалось на перспективу, а не только на нынешних 10 000 обращениях?", ""]]}, {"id": "b6", "h": "Что нельзя выпускать наружу", "вопросы": [["Что нельзя выпускать за пределы компании ни при каких условиях?", ""], ["Приемлемо ли, что наружу уходит только звук разговора, а расшифровки и распознавание голоса остаются внутри?", ""], ["Есть ли ограничения, из-за которых данные обращений нельзя передавать внешнему обработчику?", "Требуется согласование с кибербезопасностью и, судя по всему, с директором Тимуром. Заказчик сказал, что безопасность обещает не блокировать, если получит внятные ответы; в компании уже был похожий прецедент в департаменте цифрового развития."]]}, {"id": "b7", "h": "Материалы для демонстрации", "вопросы": [["Какие выгрузки вы можете прислать: Excel по наличию, выгрузка с сайта, что-то ещё?", "На встрече обещали прислать: классификаторы и категории обращений, Excel-выгрузки и выгрузку с сайта с пояснением, какой блок сведений откуда берётся, а также точные цифры по нагрузке — число звонков и чатов в день, число одновременных звонков, разбивку по каналам."], ["По каждой выгрузке — какой блок сведений оттуда берётся?", ""], ["Комплект брошюр по двум-трём моделям, включая случай, когда брошюра уже устарела — можете прислать?", ""], ["Переписка директа и чата за любой месяц в том виде, в каком выгружается — можете прислать?", ""], ["Расшифровки или записи 20–30 разговоров разных типов — можете прислать?", ""], ["Адрес одного центра, чей сайт считать образцом?", ""]]}];
+ var КЕГЛИ=[15,14,13], ном=0, сост={}, ссылки=[];
+ function э(t,к,тк){var e=document.createElement(t); if(к)e.className=к; if(тк!==undefined)e.textContent=тк; return e;}
+ function подогнать(ta){
+   var д=(ta.value||"").length, к=д<=160?КЕГЛИ[0]:(д<=300?КЕГЛИ[1]:КЕГЛИ[2]);
+   ta.style.fontSize=к+"px"; ta.style.lineHeight="1.45"; ta.style.height="auto";
+   ta.style.height=(ta.scrollHeight+(ta.offsetHeight-ta.clientHeight))+"px";
+ }
+ function сохранить(){ try{localStorage.setItem("amq",JSON.stringify(сост));}catch(e){} }
+ function загрузить(){ try{сост=JSON.parse(localStorage.getItem("amq")||"{}");}catch(e){сост={};} }
+ function отрисовать(){
+   var main=document.getElementById("amq-main"), toc=document.getElementById("amq-toc");
+   БЛОКИ.forEach(function(б){
+     var a=э("a"); a.href="#"+б.id;
+     a.appendChild(э("span",null,б.h)); a.appendChild(э("span","cnt",""));
+     toc.appendChild(a); ссылки.push({б:б,a:a});
+     var s=э("section"); s.id=б.id; s.appendChild(э("h2",null,б.h));
+     var hd=э("div","hdr"); hd.appendChild(э("span",null,"Вопрос")); hd.appendChild(э("span",null,"Ответ")); s.appendChild(hd);
+     б.вопросы.forEach(function(п){
+       var n=++ном, r=э("div","row"), ask=э("div","ask");
+       ask.appendChild(э("div","n",String(n)));
+       var wrap=э("div"); wrap.appendChild(э("p",null,п[0])); ask.appendChild(wrap); r.appendChild(ask);
+       var ключ=б.id+".в"+n, ans=э("div"), ta=э("textarea");
+       ta.rows=1; ta.placeholder="Ответ"; ta.dataset.k=ключ;
+       ta.value=(ключ in сост)?сост[ключ]:(п[1]||"");
+       ta.addEventListener("input",function(){подогнать(ta); сост[ключ]=ta.value; сохранить(); счёт();});
+       ans.appendChild(ta); r.appendChild(ans); s.appendChild(r);
+     });
+     main.appendChild(s);
+   });
+   [].forEach.call(document.querySelectorAll(".amq textarea"),подогнать);
+ }
+ function счёт(){
+   ссылки.forEach(function(п){
+     var поля=document.querySelectorAll('.amq [data-k^="'+п.б.id+'."]'), г=0;
+     [].forEach.call(поля,function(t){ if((t.value||"").trim()) г++; });
+     п.a.querySelector(".cnt").textContent=г+"/"+поля.length;
+     п.a.className=(г===поля.length&&поля.length)?"full":"";
+   });
+ }
+ загрузить(); отрисовать(); счёт();
+ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){
+   [].forEach.call(document.querySelectorAll(".amq textarea"),подогнать);});
+ window.addEventListener("resize",function(){
+   [].forEach.call(document.querySelectorAll(".amq textarea"),подогнать);});
+})();
+</script>
