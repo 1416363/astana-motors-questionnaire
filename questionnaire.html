@@ -16,7 +16,9 @@
 @media (max-width:900px){.amq .layout{grid-template-columns:1fr;gap:28px}}
 .amq nav{position:sticky;top:20px;display:flex;flex-direction:column}
 @media (max-width:900px){.amq nav{position:static}}
-.amq nav h3{font-size:15px;font-weight:700;color:#000;margin:0 0 12px;padding:0 8px}
+.amq nav h3{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:baseline;
+ font-size:15px;font-weight:700;color:#000;margin:0 0 12px;padding:0 8px}
+.amq nav h3 .cnt{font-weight:500}
 .amq nav a{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:baseline;
  padding:7px 8px;border-radius:4px;text-decoration:none;color:var(--ink-2);font-size:13.5px}
 .amq nav a:hover{background:var(--hover)}
@@ -84,7 +86,8 @@
  function отрисовать(){
    var main=document.getElementById("amq-main"), toc=document.getElementById("amq-toc");
    main.innerHTML=""; toc.innerHTML=""; ссылки=[];
-   toc.appendChild(э("h3",null,"Оглавление"));
+   var шапка=э("h3"); шапка.appendChild(э("span",null,"Оглавление"));
+   шапка.appendChild(э("span","cnt itog","")); toc.appendChild(шапка);
    var ном=0;
    главы.forEach(function(б,ном_гл){
      б.id="g"+(ном_гл+1);
@@ -115,6 +118,10 @@
      п.a.querySelector(".cnt").textContent=г+"/"+поля.length;
      п.a.className=(г===поля.length&&поля.length)?"full":"";
    });
+   var все=document.querySelectorAll(".amq textarea"), всего=все.length, дано=0;
+   [].forEach.call(все,function(t){ if((t.value||"").trim()) дано++; });
+   var итог=document.querySelector(".amq nav h3 .itog");
+   if(итог){ итог.textContent=дано+"/"+всего; итог.style.color=(дано===всего&&всего)?"var(--done)":"var(--ink-3)"; }
  }
 
  function поле(ключ){ return document.querySelector('.amq [data-k="'+ключ+'"]'); }
