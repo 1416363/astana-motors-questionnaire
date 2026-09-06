@@ -24,13 +24,9 @@
 .amq nav a.full .cnt{color:var(--done)}
 .amq section{margin:0 0 56px;scroll-margin-top:20px}
 .amq h2{font-weight:700;font-size:23px;margin:0 0 16px;letter-spacing:-.01em;color:var(--ink)}
-.amq .hdr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:26px;
- padding-bottom:7px;border-bottom:1px solid var(--rule)}
-.amq .hdr span{font-size:12px;font-weight:500;color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em}
-@media (max-width:760px){.amq .hdr{display:none}}
-.amq .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:26px;
- border-bottom:1px solid var(--rule);padding:13px 0;align-items:start}
-@media (max-width:760px){.amq .row{grid-template-columns:1fr;gap:8px}}
+.amq .row{border-bottom:1px solid var(--rule);padding:13px 0}
+.amq .ans{margin-top:8px;padding-left:36px}
+@media (max-width:520px){.amq .ans{padding-left:0}}
 .amq .ask{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px}
 .amq .n{font-size:12.5px;color:var(--ink-3);padding-top:3px}
 .amq .ask p{margin:0}
@@ -97,12 +93,11 @@
      a.appendChild(э("span",null,н+б.имя)); a.appendChild(э("span","cnt",""));
      toc.appendChild(a); ссылки.push({б:б,a:a});
      var s=э("section"); s.id=б.id; s.appendChild(э("h2",null,н+б.имя));
-     var hd=э("div","hdr"); hd.appendChild(э("span",null,"Вопрос")); hd.appendChild(э("span",null,"Ответ")); s.appendChild(hd);
      б.пункты.forEach(function(п){
        var n=++ном, r=э("div","row"), ask=э("div","ask");
        ask.appendChild(э("div","n",String(n)));
        var wrap=э("div"); wrap.appendChild(э("p",null,п.вопрос)); ask.appendChild(wrap); r.appendChild(ask);
-       var ключ="с"+п.строка, ans=э("div"), ta=э("textarea");
+       var ключ="с"+п.строка, ans=э("div","ans"), ta=э("textarea");
        ta.rows=1; ta.placeholder="Ответ"; ta.dataset.k=ключ; ta.dataset.g=б.id;
        ta.value=(ключ in сост)?сост[ключ]:(п.ответ||"");
        ta.addEventListener("input",function(){подогнать(ta); сост[ключ]=ta.value; правки[ключ]=1; сохранить(); счёт(); отложить();});
