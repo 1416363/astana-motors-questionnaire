@@ -22,6 +22,7 @@
  padding:7px 8px;border-radius:4px;text-decoration:none;color:var(--ink-2);font-size:13.5px}
 .amq nav a:hover{background:var(--hover)}
 .amq nav .cnt{font-size:12px;color:var(--ink-3)}
+.amq nav h3 .cnt{font-size:inherit;color:inherit}
 .amq nav a.full .cnt{color:var(--done)}
 .amq section{margin:0 0 56px;scroll-margin-top:20px}
 .amq h2{font-weight:700;font-size:23px;margin:0 0 16px;letter-spacing:-.01em;color:var(--ink)}
@@ -120,7 +121,7 @@
    var все=document.querySelectorAll(".amq textarea"), всего=все.length, дано=0;
    [].forEach.call(все,function(t){ if((t.value||"").trim()) дано++; });
    var итог=document.querySelector(".amq nav h3 .itog");
-   if(итог){ итог.textContent=дано+"/"+всего; итог.style.color=(дано===всего&&всего)?"var(--done)":"var(--ink-3)"; }
+   if(итог) итог.textContent=дано+"/"+всего;
  }
 
  function поле(ключ){ return document.querySelector('.amq [data-k="'+ключ+'"]'); }
