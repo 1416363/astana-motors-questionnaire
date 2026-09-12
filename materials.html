@@ -79,9 +79,24 @@
                 <h2 class="text-2xl font-bold text-gray-900">Документы, по которым бот будет отвечать</h2>
             </div>
             
-            <p class="text-gray-600 mb-6 text-base max-w-3xl">
-                Пришлите, пожалуйста, материалы, по которым ваши менеджеры консультируют клиентов. Присылайте файлы как есть, переделывать их не нужно.
-            </p>
+            <div class="bg-gray-100 rounded-xl p-4 sm:p-5 border border-gray-200 mb-6 max-w-2xl">
+                <h3 class="text-sm font-semibold text-gray-900 mb-2.5 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Инструкции
+                </h3>
+                <ul class="space-y-2 text-gray-700 text-sm leading-snug">
+                    <li class="flex items-start gap-3">
+                        <div class="w-1 h-1 rounded-full bg-gray-500 mt-1.5 shrink-0"></div>
+                        <span>Пришлите, пожалуйста, материалы, по которым ваши менеджеры консультируют клиентов. Присылайте файлы как есть, переделывать их не нужно.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1 h-1 rounded-full bg-gray-500 mt-1.5 shrink-0"></div>
+                        <span>Бот знает только то, что написано в этих файлах. Поэтому вопросы из пункта 2 должны опираться на эти же файлы.</span>
+                    </li>
+                </ul>
+            </div>
 
             <ul class="flex flex-col gap-4 mb-8 max-w-4xl">
                 <!-- Item 1 -->
@@ -189,12 +204,6 @@
                 </li>
             </ul>
 
-            <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 flex gap-3 text-gray-800 max-w-2xl">
-                <svg class="w-6 h-6 shrink-0 mt-0.5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p class="text-sm font-medium">Бот знает только то, что написано в этих файлах. Поэтому вопросы из пункта 2 должны опираться на эти же файлы.</p>
-            </div>
         </section>
 
         <!-- Block 2: Questions -->
