@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запрос материалов для демо чат-бота</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
+    <style>
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: #f3f4f6; /* Gray-100 */
+            background-image: radial-gradient(at 0% 0%, #ffffff 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, #e5e7eb 0, transparent 50%);
+            background-attachment: fixed;
+            color: #111827; /* Gray-900 */
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e5e7eb; /* Gray-200 */
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom grayscale scrollbar for table wrapper */
+        .table-scroll::-webkit-scrollbar { height: 6px; }
+        .table-scroll::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 4px; }
+        .table-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+        .table-scroll::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+        /* Editable cell styles */
+        [contenteditable="true"] {
+            transition: background-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        [contenteditable="true"]:focus, [contenteditable="true"]:hover {
+            background-color: #f9fafb;
+            box-shadow: inset 0 0 0 1px #d1d5db;
+            border-radius: 0.375rem;
+        }
+        
+        /* Smooth transitions for inputs */
+        .input-transition { transition: all 0.2s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-5xl mx-auto space-y-8">
+        
+        <!-- Header Section -->
+        <header class="animate-fade-in-up space-y-4 mb-12 text-left">
+            <div class="inline-flex items-center justify-center p-3 bg-gray-200 rounded-2xl mb-2 text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                </svg>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">Запрос материалов для демо чат-бота</h1>
+            <p class="text-lg text-gray-600 max-w-3xl leading-relaxed">
+                Бот будет отвечать клиентам на вопросы об автомобилях: какой привод, что входит в комплектацию, есть ли люк или камеры и т.д. Ответы бот берёт только из документов, которые вы нам передадите, поэтому для демо нам нужны две вещи.
+            </p>
+        </header>
+
+        <!-- Block 1: Documents -->
+        <section class="glass-card rounded-3xl p-6 sm:p-10 shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up delay-100">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-800 font-bold text-lg">1</div>
+                <h2 class="text-2xl font-bold text-gray-900">Документы, по которым бот будет отвечать</h2>
+            </div>
+            
+            <p class="text-gray-600 mb-6 text-base">
+                Пришлите, пожалуйста, материалы, по которым ваши менеджеры консультируют клиентов. Присылайте файлы как есть, переделывать их не нужно.
+            </p>
+
+            <ul class="flex flex-col gap-4 mb-8">
+                <!-- Item 1 -->
+                <li class="flex flex-col p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start gap-3 mb-4">
+                        <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-gray-800 font-medium">Спецификации и комплектации моделей в Excel или PDF.</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full">
+                        <div class="relative w-full sm:w-1/3">
+                            <input type="file" id="file-1" class="hidden file-input" onchange="updateFileName(this)">
+                            <label for="file-1" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                <span class="truncate file-name">Загрузить файл</span>
+                            </label>
+                        </div>
+                        <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
+                        <div class="w-full sm:flex-1">
+                            <input type="url" placeholder="Вставьте ссылку на файл..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        </div>
+                    </div>
+                    <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
+                </li>
+
+                <!-- Item 2 -->
+                <li class="flex flex-col p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start gap-3 mb-4">
+                        <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-gray-800 font-medium">Рекламные буклеты и брошюры в PDF.</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full">
+                        <div class="relative w-full sm:w-1/3">
+                            <input type="file" id="file-2" class="hidden file-input" onchange="updateFileName(this)">
+                            <label for="file-2" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                <span class="truncate file-name">Загрузить файл</span>
+                            </label>
+                        </div>
+                        <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
+                        <div class="w-full sm:flex-1">
+                            <input type="url" placeholder="Вставьте ссылку на файл..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        </div>
+                    </div>
+                    <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
+                </li>
+
+                <!-- Item 3 -->
+                <li class="flex flex-col p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start gap-3 mb-4">
+                        <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-gray-800 font-medium">Ссылки на страницы вашего сайта, если там есть информация, которой нет в файлах.</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full">
+                        <div class="relative w-full sm:w-1/3">
+                            <input type="file" id="file-3" class="hidden file-input" onchange="updateFileName(this)">
+                            <label for="file-3" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition opacity-70 hover:opacity-100">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                <span class="truncate file-name">Загрузить файл</span>
+                            </label>
+                        </div>
+                        <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
+                        <div class="w-full sm:flex-1">
+                            <input type="url" placeholder="Вставьте ссылку на страницу..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        </div>
+                    </div>
+                    <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
+                </li>
+
+                <!-- Item 4 -->
+                <li class="flex flex-col p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-gray-300 transition-colors">
+                    <div class="flex items-start gap-3 mb-4">
+                        <svg class="w-6 h-6 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-gray-800 font-medium">Фиды, если они у вас есть.</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full">
+                        <div class="relative w-full sm:w-1/3">
+                            <input type="file" id="file-4" class="hidden file-input" onchange="updateFileName(this)">
+                            <label for="file-4" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                                <span class="truncate file-name">Загрузить файл</span>
+                            </label>
+                        </div>
+                        <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
+                        <div class="w-full sm:flex-1">
+                            <input type="url" placeholder="Вставьте ссылку на фид..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        </div>
+                    </div>
+                    <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
+                </li>
+            </ul>
+
+            <div class="bg-gray-100 border border-gray-300 rounded-xl p-5 flex gap-4 text-gray-800">
+                <svg class="w-6 h-6 shrink-0 mt-0.5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm font-medium">Бот знает только то, что написано в этих файлах. Поэтому вопросы из пункта 2 должны опираться на эти же файлы.</p>
+            </div>
+        </section>
+
+        <!-- Block 2: Questions -->
+        <section class="glass-card rounded-3xl p-6 sm:p-10 shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up delay-200">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-800 font-bold text-lg">2</div>
+                <h2 class="text-2xl font-bold text-gray-900">Список вопросов с правильными ответами</h2>
+            </div>
+
+            <p class="text-gray-600 mb-6 text-base">
+                Составьте, пожалуйста, вопросы, которые клиенты задают о машинах. К каждому вопросу напишите ожидаемый ответ и место в документе, его название и страницу, подтверждающую ответ. По нему мы настраиваем правильность ответов. 
+            </p>
+
+            <!-- Tips / Wishes moved BEFORE the table -->
+            <div class="bg-gray-100 rounded-2xl p-6 sm:p-8 border border-gray-200 mb-8">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Несколько пожеланий к списку:
+                </h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-gray-500 mt-2 shrink-0"></div>
+                        <span>Пишите вопросы словами клиентов, как их присылают в WhatsApp или задают по телефону: <em>«4х4 есть?»</em>, <em>«а люк в базе будет?»</em>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-gray-500 mt-2 shrink-0"></div>
+                        <span>Добавьте вопросы сравнения, если клиенты такие задают: модель с моделью, комплектация с комплектацией.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-gray-500 mt-2 shrink-0"></div>
+                        <span>Если ответ есть в нескольких документах, укажите все, как в примере про люк.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-gray-500 mt-2 shrink-0"></div>
+                        <span>Добавьте 3–5 вопросов, ответа на которые в документах нет. Так мы проверим, что бот не выдумывает.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="w-1.5 h-1.5 rounded-full bg-gray-900 mt-2 shrink-0"></div>
+                        <span class="font-bold text-gray-900">Для настройки демо хватит 15–25 вопросов.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="text-gray-600 mb-4 text-sm italic">
+                Пример (комплектации и опции условные). Таблицу ниже можно редактировать: кликните на текст, чтобы изменить его:
+            </p>
+
+            <!-- Editable Table -->
+            <div class="table-scroll overflow-x-auto rounded-xl border border-gray-200 shadow-sm mb-4">
+                <table class="w-full text-left text-sm whitespace-normal min-w-[800px]">
+                    <thead class="bg-gray-100 text-gray-700 font-semibold border-b border-gray-200">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 w-1/3">Вопрос клиента</th>
+                            <th scope="col" class="px-6 py-4 w-1/3">Правильный ответ</th>
+                            <th scope="col" class="px-6 py-4 w-1/3">Где это написано</th>
+                        </tr>
+                    </thead>
+                    <tbody id="questions-tbody" class="divide-y divide-gray-100 bg-white">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 text-gray-900" contenteditable="true">Есть полный привод у Tucson в комплектации Comfort?</td>
+                            <td class="px-6 py-4 text-gray-700" contenteditable="true">Нет, в Comfort только передний привод. Полный привод есть в Luxe и Prestige.</td>
+                            <td class="px-6 py-4 text-gray-600 font-medium" contenteditable="true">Excel «Спецификации Hyundai», лист Tucson, строка «Привод»</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 text-gray-900" contenteditable="true">У какого кроссовера полный привод уже в базе, Tucson или Santa Fe?</td>
+                            <td class="px-6 py-4 text-gray-700" contenteditable="true">У Santa Fe: у него полный привод во всех комплектациях. У Tucson полный привод появляется с Luxe.</td>
+                            <td class="px-6 py-4 text-gray-600 font-medium" contenteditable="true">Тот же Excel, листы Tucson и Santa Fe, строка «Привод»</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 text-gray-900" contenteditable="true">В какой комплектации Santa Fe есть панорамный люк?</td>
+                            <td class="px-6 py-4 text-gray-700" contenteditable="true">Только в Prestige.</td>
+                            <td class="px-6 py-4 text-gray-600 font-medium" contenteditable="true">PDF-буклет Santa Fe, стр. 12; Excel, лист Santa Fe, строка «Люк»</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 text-gray-900" contenteditable="true">У Tucson в базе есть камера заднего вида? А круговой обзор?</td>
+                            <td class="px-6 py-4 text-gray-700" contenteditable="true">Камера заднего вида есть во всех комплектациях, круговой обзор 360° только в Prestige.</td>
+                            <td class="px-6 py-4 text-gray-600 font-medium" contenteditable="true">PDF-спецификация Tucson, стр. 3, раздел «Системы помощи водителю»</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 text-gray-900" contenteditable="true">Можно поставить люк в Tucson Comfort за доплату?</td>
+                            <td class="px-6 py-4 text-gray-700" contenteditable="true">Бот отвечает, что такой информации нет, и предлагает уточнить у менеджера.</td>
+                            <td class="px-6 py-4 text-gray-600 font-medium" contenteditable="true">Нигде: в спецификации и буклете этого нет</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Table Actions: Add Row Button & Counter (Lightened) -->
+            <div class="flex justify-start mb-2">
+                <button type="button" onclick="addNewRow()" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-4 focus:ring-gray-100 transition-all font-medium text-sm shadow-sm">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Добавить строку
+                    <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-gray-100 text-gray-600 border border-gray-200">
+                        Осталось <span id="row-counter" class="mx-1">15</span> до 20
+                    </span>
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="saving" class="fixed bottom-6 right-6 px-4 py-2.5 rounded-lg bg-gray-900 text-white text-sm shadow-lg opacity-0 pointer-events-none transition-opacity duration-200"></div>
+
+    <script>
+        // Update label when file is selected
+        function updateFileName(inputElement) {
+            const label = inputElement.nextElementSibling;
+            const textSpan = label.querySelector('.file-name');
+            if (inputElement.files && inputElement.files.length > 0) {
+                textSpan.textContent = inputElement.files[0].name;
+                label.classList.add('bg-gray-50', 'border-gray-400');
+            } else {
+                textSpan.textContent = 'Загрузить файл';
+                label.classList.remove('bg-gray-50', 'border-gray-400');
+            }
+        }
+
+        // Logic for editable table row insertion and counting
+        function updateCounter() {
+            const tbody = document.getElementById('questions-tbody');
+            const rowCount = tbody.getElementsByTagName('tr').length;
+            const remaining = Math.max(0, 20 - rowCount);
+            document.getElementById('row-counter').textContent = remaining;
+        }
+
+        function addNewRow() {
+            const tbody = document.getElementById('questions-tbody');
+            const newRow = document.createElement('tr');
+            newRow.className = 'hover:bg-gray-50 transition-colors';
+            
+            // Generate 3 editable cells
+            for(let i=0; i<3; i++) {
+                const cell = document.createElement('td');
+                cell.className = i === 2 ? 'px-6 py-4 text-gray-600 font-medium' : 'px-6 py-4 text-gray-900';
+                cell.setAttribute('contenteditable', 'true');
+                cell.textContent = 'Нажмите, чтобы ввести текст...';
+                
+                // Clear default text on first focus
+                cell.addEventListener('focus', function clearText() {
+                    if(this.textContent === 'Нажмите, чтобы ввести текст...') {
+                        this.textContent = '';
+                    }
+                    this.removeEventListener('focus', clearText);
+                });
+                
+                newRow.appendChild(cell);
+            }
+            
+            tbody.appendChild(newRow);
+            updateCounter();
+            
+            // Scroll to newly added row smoothly
+            newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            newRow.cells[0].focus(); // Focus first cell of the new row
+        }
+
+        // Initialize counter on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCounter();
+            
+            // Ensure pasting text into contenteditable strips formatting
+            document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+                el.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    var text = (e.originalEvent || e).clipboardData.getData('text/plain');
+                    document.execCommand('insertText', false, text);
+                });
+            });
+        });
+    </script>
+
+    <script>
+    /* Механика сохранения. Оформление страницы не трогает: только поведение.
+       Файл уезжает в папку на Диске владельца, ссылки и таблица — в его таблицу. */
+    (function(){
+        "use strict";
+
+        var ПРИЁМНИК = "https://script.google.com/macros/s/AKfycbxOiycJ5ulXXB_9NyTxBj7ZWLAmy3jaiFgyTh3CTiqXCl847kfNYBjWib1klngjedN-/exec";
+        var ХРАН = "материалы-для-демо-astana-motors";
+        var ЗАГЛУШКА = "Нажмите, чтобы ввести текст...";
+
+        var КЛАССЫ = [
+            "px-6 py-4 text-gray-900",
+            "px-6 py-4 text-gray-700",
+            "px-6 py-4 text-gray-600 font-medium"
+        ];
+
+        var сост = { ссылки:{}, файлы:[], строки:null };
+        var таймер = null, таймер_вида = null;
+
+        function сохранить(){ try{ localStorage.setItem(ХРАН, JSON.stringify(сост)); }catch(e){} }
+        function загрузить(){
+            try{
+                var с = JSON.parse(localStorage.getItem(ХРАН) || "null");
+                if (с) сост = { ссылки:с.ссылки||{}, файлы:с.файлы||[], строки:с.строки||null };
+            }catch(e){}
+        }
+
+        function мигнуть(текст, плохо){
+            var п = document.getElementById("saving");
+            if (!п) return;
+            п.textContent = текст;
+            п.classList.remove("opacity-0");
+            п.classList.add("opacity-100");
+            п.classList.toggle("bg-red-700", !!плохо);
+            п.classList.toggle("bg-gray-900", !плохо);
+            clearTimeout(таймер_вида);
+            if (!плохо) таймер_вида = setTimeout(function(){
+                п.classList.remove("opacity-100"); п.classList.add("opacity-0");
+            }, 2200);
+        }
+
+        /* ——— пункты раздела 1 ——— */
+
+        var пункты = [];
+
+        function собрать_пункты(){
+            var список = document.querySelectorAll(".glass-card ul > li");
+            Array.prototype.forEach.call(список, function(li, и){
+                var имя = li.querySelector("span.text-gray-800");
+                var вход = li.querySelector("input[type=file]");
+                var ссылка = li.querySelector("input[type=url]");
+                var принято = li.querySelector(".accepted");
+                if (!ссылка || !принято) return;
+                var п = {
+                    и: и,
+                    имя: имя ? имя.textContent.trim() : ("Пункт " + (и + 1)),
+                    вход: вход, ссылка: ссылка, принято: принято, li: li
+                };
+                пункты.push(п);
+
+                ссылка.value = сост.ссылки[и] || "";
+                ссылка.addEventListener("input", function(){
+                    сост.ссылки[и] = ссылка.value; сохранить(); отложить();
+                });
+
+                if (вход) вход.addEventListener("change", function(){
+                    Array.prototype.slice.call(вход.files).forEach(function(ф){ везти(ф, п); });
+                });
+
+                сост.файлы.filter(function(ф){ return ф.пункт === п.имя; }).forEach(function(ф){
+                    принято.appendChild(строка_файла(ф.имя, ф.вес, ф.ссылка));
+                });
+            });
+        }
+
+        function строка_файла(имя, вес, ссылка){
+            var р = document.createElement("div");
+            р.className = "flex items-center gap-2 text-gray-600";
+            var г = document.createElement("span");
+            г.className = "text-gray-900 shrink-0"; г.textContent = "✓";
+            var а = document.createElement("a");
+            а.href = ссылка; а.target = "_blank"; а.rel = "noopener";
+            а.className = "text-gray-900 underline decoration-gray-300 hover:decoration-gray-900 break-all";
+            а.textContent = имя;
+            var в = document.createElement("span");
+            в.className = "text-gray-400 shrink-0"; в.textContent = вес || "";
+            р.appendChild(г); р.appendChild(а); р.appendChild(в);
+            return р;
+        }
+
+        function везти(файл, п){
+            var р = document.createElement("div");
+            р.className = "flex items-center gap-2 text-gray-500";
+            var г = document.createElement("span"); г.className = "shrink-0"; г.textContent = "↑";
+            var и = document.createElement("span"); и.className = "break-all"; и.textContent = файл.name;
+            var ж = document.createElement("span");
+            ж.className = "shrink-0 h-1 w-24 rounded bg-gray-200 overflow-hidden";
+            var ш = document.createElement("span");
+            ш.className = "block h-full w-0 bg-gray-900 transition-all duration-200";
+            ж.appendChild(ш);
+            р.appendChild(г); р.appendChild(и); р.appendChild(ж);
+            п.принято.appendChild(р);
+            ш.style.width = "10%";
+
+            var чтец = new FileReader();
+            чтец.onprogress = function(с){
+                if (с.lengthComputable) ш.style.width = (10 + 35 * с.loaded / с.total) + "%";
+            };
+            чтец.onerror = function(){ не_прошёл(р, файл.name, "файл не удалось прочитать"); };
+            чтец.onload = function(){
+                ш.style.width = "55%";
+                var данные = String(чтец.result).split(",")[1] || "";
+                fetch(ПРИЁМНИК, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({ вид:"файл", пункт:п.имя, имя:файл.name,
+                                           тип:файл.type || "application/octet-stream", данные:данные })
+                })
+                .then(function(о){ ш.style.width = "90%"; return о.json(); })
+                .then(function(о){
+                    if (!о || !о.ок) throw new Error(о && о.ошибка ? о.ошибка : "приёмник не принял файл");
+                    сост.файлы.push({ пункт:п.имя, имя:о.имя, вес:о.вес, ссылка:о.ссылка });
+                    сохранить();
+                    п.принято.replaceChild(строка_файла(о.имя, о.вес, о.ссылка), р);
+                    мигнуть("Файл принят: " + о.имя);
+                })
+                .catch(function(ош){ не_прошёл(р, файл.name, String(ош.message || ош)); });
+            };
+            чтец.readAsDataURL(файл);
+        }
+
+        function не_прошёл(р, имя, почему){
+            р.className = "flex items-start gap-2 text-red-700";
+            р.textContent = "";
+            var г = document.createElement("span"); г.className = "shrink-0"; г.textContent = "!";
+            var т = document.createElement("span");
+            т.textContent = имя + " — не прошёл: " + почему + ". Дайте, пожалуйста, ссылку в поле рядом.";
+            р.appendChild(г); р.appendChild(т);
+            мигнуть("Файл не прошёл: " + имя, true);
+        }
+
+        /* ——— таблица вопросов ——— */
+
+        function тело(){ return document.getElementById("questions-tbody"); }
+
+        function чисто(з){
+            var т = String(з == null ? "" : з).replace(/ /g, " ").trim();
+            return т === ЗАГЛУШКА ? "" : т;
+        }
+
+        function снять_строки(){
+            var из = [];
+            Array.prototype.forEach.call(тело().rows, function(р){
+                из.push([чисто(р.cells[0] && р.cells[0].textContent),
+                         чисто(р.cells[1] && р.cells[1].textContent),
+                         чисто(р.cells[2] && р.cells[2].textContent)]);
+            });
+            return из;
+        }
+
+        function поставить_строки(из){
+            var т = тело();
+            т.textContent = "";
+            из.forEach(function(с){
+                var р = document.createElement("tr");
+                р.className = "hover:bg-gray-50 transition-colors";
+                for (var к = 0; к < 3; к++){
+                    var я = document.createElement("td");
+                    я.className = КЛАССЫ[к];
+                    я.setAttribute("contenteditable", "true");
+                    я.textContent = с[к] || "";
+                    р.appendChild(я);
+                }
+                т.appendChild(р);
+            });
+        }
+
+        function следить_за_таблицей(){
+            тело().addEventListener("input", function(){
+                сост.строки = снять_строки(); сохранить(); отложить();
+            });
+            тело().addEventListener("blur", function(){
+                сост.строки = снять_строки(); сохранить();
+            }, true);
+        }
+
+        /* ——— отправка ——— */
+
+        function отложить(){ clearTimeout(таймер); таймер = setTimeout(отправить, 1500); }
+
+        function отправить(){
+            var ссылки = [];
+            пункты.forEach(function(п){
+                String(сост.ссылки[п.и] || "").split(/[\n,;\s]+/).forEach(function(с){
+                    if (с.trim()) ссылки.push({ пункт:п.имя, ссылка:с.trim() });
+                });
+            });
+            var строки = снять_строки();
+            сост.строки = строки; сохранить();
+            var вопросы = строки.map(function(с){ return { вопрос:с[0], ответ:с[1], место:с[2] }; });
+
+            Promise.all([
+                fetch(ПРИЁМНИК, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"},
+                    body: JSON.stringify({ вид:"ссылки", ссылки:ссылки }) }),
+                fetch(ПРИЁМНИК, { method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"},
+                    body: JSON.stringify({ вид:"вопросы", вопросы:вопросы }) })
+            ])
+            .then(function(){ мигнуть("Сохранено"); })
+            .catch(function(){
+                мигнуть("Не сохранилось — повторю через полминуты", true);
+                setTimeout(отправить, 30000);
+            });
+        }
+
+        /* ——— пуск ——— */
+
+        function пуск(){
+            загрузить();
+            if (сост.строки && сост.строки.length) поставить_строки(сост.строки);
+            собрать_пункты();
+            следить_за_таблицей();
+            if (typeof updateCounter === "function") updateCounter();
+            var кнопка = document.querySelector('button[onclick="addNewRow()"]');
+            if (кнопка) кнопка.addEventListener("click", function(){
+                setTimeout(function(){ сост.строки = снять_строки(); сохранить(); }, 0);
+            });
+        }
+
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", пуск);
+        else пуск();
+    })();
+    </script>
+</body>
+</html>
