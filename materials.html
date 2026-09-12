@@ -94,17 +94,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full sm:max-w-2xl">
                         <div class="relative w-full sm:w-1/3">
-                            <input type="file" id="file-1" class="hidden file-input" onchange="updateFileName(this)">
+                            <input type="file" id="file-1" class="hidden file-input" multiple onchange="updateFileName(this)">
                             <label for="file-1" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
                                 <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                                <span class="truncate file-name">Загрузить файл</span>
+                                <span class="truncate file-name">Загрузить файлы</span>
                             </label>
                         </div>
                         <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
-                        <div class="w-full sm:flex-1">
-                            <input type="url" placeholder="Вставьте ссылку на файл..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        <div class="w-full sm:flex-1 flex gap-2">
+                            <input type="url" placeholder="Вставьте ссылку на файл..." class="link-input flex-1 min-w-0 px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                            <button type="button" class="link-add shrink-0 px-3 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 input-transition">Добавить</button>
                         </div>
                     </div>
+                    <div class="links-list flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                     <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                 </li>
 
@@ -118,17 +120,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full sm:max-w-2xl">
                         <div class="relative w-full sm:w-1/3">
-                            <input type="file" id="file-2" class="hidden file-input" onchange="updateFileName(this)">
+                            <input type="file" id="file-2" class="hidden file-input" multiple onchange="updateFileName(this)">
                             <label for="file-2" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
                                 <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                                <span class="truncate file-name">Загрузить файл</span>
+                                <span class="truncate file-name">Загрузить файлы</span>
                             </label>
                         </div>
                         <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
-                        <div class="w-full sm:flex-1">
-                            <input type="url" placeholder="Вставьте ссылку на файл..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        <div class="w-full sm:flex-1 flex gap-2">
+                            <input type="url" placeholder="Вставьте ссылку на файл..." class="link-input flex-1 min-w-0 px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                            <button type="button" class="link-add shrink-0 px-3 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 input-transition">Добавить</button>
                         </div>
                     </div>
+                    <div class="links-list flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                     <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                 </li>
 
@@ -142,17 +146,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full sm:max-w-2xl">
                         <div class="relative w-full sm:w-1/3">
-                            <input type="file" id="file-3" class="hidden file-input" onchange="updateFileName(this)">
+                            <input type="file" id="file-3" class="hidden file-input" multiple onchange="updateFileName(this)">
                             <label for="file-3" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition opacity-70 hover:opacity-100">
                                 <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                                <span class="truncate file-name">Загрузить файл</span>
+                                <span class="truncate file-name">Загрузить файлы</span>
                             </label>
                         </div>
                         <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
-                        <div class="w-full sm:flex-1">
-                            <input type="url" placeholder="Вставьте ссылку на страницу..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        <div class="w-full sm:flex-1 flex gap-2">
+                            <input type="url" placeholder="Вставьте ссылку на страницу..." class="link-input flex-1 min-w-0 px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                            <button type="button" class="link-add shrink-0 px-3 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 input-transition">Добавить</button>
                         </div>
                     </div>
+                    <div class="links-list flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                     <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                 </li>
 
@@ -166,17 +172,19 @@
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 pl-0 sm:pl-9 w-full sm:max-w-2xl">
                         <div class="relative w-full sm:w-1/3">
-                            <input type="file" id="file-4" class="hidden file-input" onchange="updateFileName(this)">
+                            <input type="file" id="file-4" class="hidden file-input" multiple onchange="updateFileName(this)">
                             <label for="file-4" class="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer input-transition">
                                 <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                                <span class="truncate file-name">Загрузить файл</span>
+                                <span class="truncate file-name">Загрузить файлы</span>
                             </label>
                         </div>
                         <div class="hidden sm:flex items-center justify-center text-gray-400 text-sm px-2">или</div>
-                        <div class="w-full sm:flex-1">
-                            <input type="url" placeholder="Вставьте ссылку на фид..." class="w-full px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                        <div class="w-full sm:flex-1 flex gap-2">
+                            <input type="url" placeholder="Вставьте ссылку на фид..." class="link-input flex-1 min-w-0 px-4 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 focus:border-gray-400 input-transition placeholder-gray-400 text-gray-900">
+                            <button type="button" class="link-add shrink-0 px-3 py-2.5 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 input-transition">Добавить</button>
                         </div>
                     </div>
+                    <div class="links-list flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                     <div class="accepted flex flex-col gap-1.5 mt-3 sm:pl-9 text-sm"></div>
                 </li>
             </ul>
@@ -193,7 +201,7 @@
         <section class="glass-card rounded-3xl p-6 sm:p-10 shadow-sm hover:shadow-md transition-shadow duration-300 animate-fade-in-up delay-200">
             <div class="flex items-center gap-4 mb-6">
                 <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-800 font-bold text-lg">2</div>
-                <h2 class="text-2xl font-bold text-gray-900">Список вопросов с эталонными ответами</h2>
+                <h2 class="text-2xl font-bold text-gray-900">Примеры вопросов и ответов</h2>
             </div>
 
             <p class="text-gray-600 mb-6 text-base max-w-3xl">
@@ -299,11 +307,15 @@
         function updateFileName(inputElement) {
             const label = inputElement.nextElementSibling;
             const textSpan = label.querySelector('.file-name');
-            if (inputElement.files && inputElement.files.length > 0) {
+            var н = inputElement.files ? inputElement.files.length : 0;
+            if (н === 1) {
                 textSpan.textContent = inputElement.files[0].name;
                 label.classList.add('bg-gray-50', 'border-gray-400');
+            } else if (н > 1) {
+                textSpan.textContent = 'Выбрано файлов: ' + н;
+                label.classList.add('bg-gray-50', 'border-gray-400');
             } else {
-                textSpan.textContent = 'Загрузить файл';
+                textSpan.textContent = 'Загрузить файлы';
                 label.classList.remove('bg-gray-50', 'border-gray-400');
             }
         }
@@ -387,6 +399,15 @@
                 var с = JSON.parse(localStorage.getItem(ХРАН) || "null");
                 if (с) сост = { ссылки:с.ссылки||{}, файлы:с.файлы||[], строки:с.строки||null };
             }catch(e){}
+            // Прежде в пункте хранилась одна строка — превращаем в перечень
+            Object.keys(сост.ссылки).forEach(function(к){
+                var з = сост.ссылки[к];
+                if (typeof з === "string") {
+                    сост.ссылки[к] = з.split(/[\n,;\s]+/).filter(function(ч){ return ч.trim(); });
+                } else if (!Array.isArray(з)) {
+                    сост.ссылки[к] = [];
+                }
+            });
         }
 
         function мигнуть(текст, плохо){
@@ -412,20 +433,33 @@
             Array.prototype.forEach.call(список, function(li, и){
                 var имя = li.querySelector("span.text-gray-800");
                 var вход = li.querySelector("input[type=file]");
-                var ссылка = li.querySelector("input[type=url]");
+                var поле = li.querySelector(".link-input");
+                var кнопка = li.querySelector(".link-add");
+                var перечень = li.querySelector(".links-list");
                 var принято = li.querySelector(".accepted");
-                if (!ссылка || !принято) return;
+                if (!поле || !принято) return;
                 var п = {
                     и: и,
                     имя: имя ? имя.textContent.trim() : ("Пункт " + (и + 1)),
-                    вход: вход, ссылка: ссылка, принято: принято, li: li
+                    вход: вход, поле: поле, перечень: перечень, принято: принято, li: li
                 };
                 пункты.push(п);
 
-                ссылка.value = сост.ссылки[и] || "";
-                ссылка.addEventListener("input", function(){
-                    сост.ссылки[и] = ссылка.value; сохранить(); отложить();
+                if (!Array.isArray(сост.ссылки[и])) сост.ссылки[и] = [];
+                нарисовать_ссылки(п);
+
+                function принять_ссылку(){
+                    var з = поле.value.trim();
+                    if (!з) return;
+                    сост.ссылки[и].push(з);
+                    поле.value = "";
+                    сохранить(); нарисовать_ссылки(п); отложить();
+                }
+                if (кнопка) кнопка.addEventListener("click", принять_ссылку);
+                поле.addEventListener("keydown", function(с){
+                    if (с.key === "Enter"){ с.preventDefault(); принять_ссылку(); }
                 });
+                поле.addEventListener("blur", принять_ссылку);
 
                 if (вход) вход.addEventListener("change", function(){
                     Array.prototype.slice.call(вход.files).forEach(function(ф){ везти(ф, п); });
@@ -434,6 +468,32 @@
                 сост.файлы.filter(function(ф){ return ф.пункт === п.имя; }).forEach(function(ф){
                     принято.appendChild(строка_файла(ф.имя, ф.вес, ф.ссылка));
                 });
+            });
+        }
+
+        function нарисовать_ссылки(п){
+            if (!п.перечень) return;
+            п.перечень.textContent = "";
+            сост.ссылки[п.и].forEach(function(з, к){
+                var р = document.createElement("div");
+                р.className = "flex items-center gap-2 text-gray-600";
+                var г = document.createElement("span");
+                г.className = "text-gray-900 shrink-0"; г.textContent = "✓";
+                var а = document.createElement("a");
+                а.href = з; а.target = "_blank"; а.rel = "noopener";
+                а.className = "text-gray-900 underline decoration-gray-300 hover:decoration-gray-900 break-all";
+                а.textContent = з;
+                var у = document.createElement("button");
+                у.type = "button";
+                у.className = "shrink-0 text-gray-400 hover:text-gray-900 px-1";
+                у.textContent = "убрать";
+                у.setAttribute("aria-label", "Убрать ссылку " + з);
+                у.addEventListener("click", function(){
+                    сост.ссылки[п.и].splice(к, 1);
+                    сохранить(); нарисовать_ссылки(п); отложить();
+                });
+                р.appendChild(г); р.appendChild(а); р.appendChild(у);
+                п.перечень.appendChild(р);
             });
         }
 
@@ -486,6 +546,10 @@
                     сост.файлы.push({ пункт:п.имя, имя:о.имя, вес:о.вес, ссылка:о.ссылка });
                     сохранить();
                     п.принято.replaceChild(строка_файла(о.имя, о.вес, о.ссылка), р);
+                    if (п.вход){
+                        var подпись = п.li.querySelector(".file-name");
+                        if (подпись) подпись.textContent = "Загрузить файлы";
+                    }
                     мигнуть("Файл принят: " + о.имя);
                 })
                 .catch(function(ош){ не_прошёл(р, файл.name, String(ош.message || ош)); });
@@ -498,7 +562,7 @@
             р.textContent = "";
             var г = document.createElement("span"); г.className = "shrink-0"; г.textContent = "!";
             var т = document.createElement("span");
-            т.textContent = имя + " — не прошёл: " + почему + ". Дайте, пожалуйста, ссылку в поле рядом.";
+            т.textContent = имя + " — не прошёл: " + почему + ". Дайте, пожалуйста, ссылку в поле рядом и нажмите «Добавить».";
             р.appendChild(г); р.appendChild(т);
             мигнуть("Файл не прошёл: " + имя, true);
         }
@@ -555,8 +619,8 @@
         function отправить(){
             var ссылки = [];
             пункты.forEach(function(п){
-                String(сост.ссылки[п.и] || "").split(/[\n,;\s]+/).forEach(function(с){
-                    if (с.trim()) ссылки.push({ пункт:п.имя, ссылка:с.trim() });
+                (сост.ссылки[п.и] || []).forEach(function(с){
+                    if (String(с).trim()) ссылки.push({ пункт:п.имя, ссылка:String(с).trim() });
                 });
             });
             var строки = снять_строки();
