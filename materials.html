@@ -474,9 +474,15 @@
                     Array.prototype.slice.call(вход.files).forEach(function(ф){ везти(ф, п); });
                 });
 
-                сост.файлы.filter(function(ф){ return ф.пункт === п.имя; }).forEach(function(ф){
-                    принято.appendChild(строка_файла(ф.имя, ф.вес, ф.ссылка));
-                });
+                нарисовать_файлы(п);
+            });
+        }
+
+        function нарисовать_файлы(п){
+            if (!п.принято) return;
+            п.принято.textContent = "";
+            сост.файлы.filter(function(ф){ return ф.пункт === п.имя; }).forEach(function(ф){
+                п.принято.appendChild(строка_файла(ф.имя, ф.вес, ф.ссылка));
             });
         }
 
@@ -651,12 +657,53 @@
 
         /* ——— пуск ——— */
 
+        function забрать(){
+            fetch(ПРИЁМНИК + "?t=" + Date.now(), { method: "GET" })
+            .then(function(о){ return о.json(); })
+            .then(function(о){
+                if (!о || !о.ок) return;
+                var менялось = false;
+
+                if (о.документы && о.документы.length){
+                    сост.файлы = о.документы.map(function(д){
+                        return { пункт:д.пункт, имя:д.имя, вес:д.вес, ссылка:д.ссылка };
+                    });
+                    менялось = true;
+                }
+
+                if (о.перечень_ссылок && о.перечень_ссылок.length){
+                    var по_пунктам = {};
+                    пункты.forEach(function(п){ по_пунктам[п.имя] = []; });
+                    о.перечень_ссылок.forEach(function(з){
+                        if (!по_пунктам[з.пункт]) по_пунктам[з.пункт] = [];
+                        по_пунктам[з.пункт].push(з.ссылка);
+                    });
+                    пункты.forEach(function(п){ сост.ссылки[п.и] = по_пунктам[п.имя] || []; });
+                    менялось = true;
+                }
+
+                if (о.строки && о.строки.length){
+                    сост.строки = о.строки;
+                    поставить_строки(сост.строки);
+                    if (typeof updateCounter === "function") updateCounter();
+                    менялось = true;
+                }
+
+                if (менялось){
+                    пункты.forEach(function(п){ нарисовать_ссылки(п); нарисовать_файлы(п); });
+                    сохранить();
+                }
+            })
+            .catch(function(){});
+        }
+
         function пуск(){
             загрузить();
             if (сост.строки && сост.строки.length) поставить_строки(сост.строки);
             собрать_пункты();
             следить_за_таблицей();
             if (typeof updateCounter === "function") updateCounter();
+            забрать();
             var кнопка = document.querySelector('button[onclick="addNewRow()"]');
             if (кнопка) кнопка.addEventListener("click", function(){
                 setTimeout(function(){ сост.строки = снять_строки(); сохранить(); }, 0);
