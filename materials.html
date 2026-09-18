@@ -657,11 +657,31 @@
 
         /* ——— пуск ——— */
 
+        // Видимая надпись, если присланное подтянуть не удалось: иначе страница
+        // молча показывает пустые поля и понять причину невозможно.
+        function не_подтянулось(почему){
+            var м = document.getElementById("не-подтянулось");
+            if (!м){
+                м = document.createElement("div");
+                м.id = "не-подтянулось";
+                м.className = "max-w-2xl mb-6 p-4 rounded-xl border border-red-300 bg-red-50 text-red-800 text-sm";
+                var шапка = document.querySelector("header");
+                if (шапка && шапка.parentNode) шапка.parentNode.insertBefore(м, шапка.nextSibling);
+                else document.body.insertBefore(м, document.body.firstChild);
+            }
+            м.textContent = "Присланное не загрузилось: " + почему
+                + ". Страница показывает пустые поля. Вероятная причина — обращение к «script.google.com»"
+                + " заблокировано расширением браузера или сетью.";
+        }
+
         function забрать(){
             fetch(ПРИЁМНИК + "?t=" + Date.now(), { method: "GET" })
-            .then(function(о){ return о.json(); })
             .then(function(о){
-                if (!о || !о.ок) return;
+                if (!о.ok) throw new Error("приёмник ответил кодом " + о.status);
+                return о.json();
+            })
+            .then(function(о){
+                if (!о || !о.ок) throw new Error(о && о.ошибка ? о.ошибка : "приёмник вернул отказ");
                 var менялось = false;
 
                 if (о.документы && о.документы.length){
@@ -694,7 +714,7 @@
                     сохранить();
                 }
             })
-            .catch(function(){});
+            .catch(function(ош){ не_подтянулось(String(ош.message || ош)); });
         }
 
         function пуск(){
