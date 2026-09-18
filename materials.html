@@ -715,24 +715,5 @@
     })();
     </script>
 
-    <script>
-    /* Сообщает высоту той странице, внутри которой показывается, — чтобы окно
-       подстраивалось под содержимое и не появлялось второй полосы прокрутки. */
-    (function(){
-        if (window.parent === window) return;
-        var прежняя = 0;
-        function послать(){
-            var в = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-            if (Math.abs(в - прежняя) < 4) return;
-            прежняя = в;
-            window.parent.postMessage({ вид: "высота-запроса-материалов", высота: в }, "*");
-        }
-        window.addEventListener("load", послать);
-        window.addEventListener("resize", послать);
-        document.addEventListener("input", послать, true);
-        document.addEventListener("click", послать, true);
-        setInterval(послать, 800);
-    })();
-    </script>
 </body>
 </html>
