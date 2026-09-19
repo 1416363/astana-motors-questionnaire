@@ -390,6 +390,7 @@
         "use strict";
 
         var ПРИЁМНИК = "https://script.google.com/macros/s/AKfycbxOiycJ5ulXXB_9NyTxBj7ZWLAmy3jaiFgyTh3CTiqXCl847kfNYBjWib1klngjedN-/exec";
+        var ДАННЫЕ = "https://1416363.github.io/astana-motors-questionnaire/materials-data.json";
         var ХРАН = "материалы-для-демо-astana-motors";
         var ЗАГЛУШКА = "Нажмите, чтобы ввести текст...";
 
@@ -674,14 +675,31 @@
                 + " заблокировано расширением браузера или сетью.";
         }
 
+        // Сначала готовый файл рядом со страницей: он обновляется сам каждые пять минут
+        // и не зависит от того, пускает ли браузер посетителя к службам Google.
+        // Если файла нет — идём напрямую к приёмнику.
         function забрать(){
-            fetch(ПРИЁМНИК + "?t=" + Date.now(), { method: "GET" })
+            взять(ДАННЫЕ + "?t=" + Date.now())
+            .catch(function(){ return взять(ПРИЁМНИК + "?t=" + Date.now()); })
+            .then(разобрать)
+            .catch(function(ош){ не_подтянулось(String(ош.message || ош)); });
+        }
+
+        function взять(адрес){
+            return fetch(адрес, { method: "GET" })
             .then(function(о){
-                if (!о.ok) throw new Error("приёмник ответил кодом " + о.status);
+                if (!о.ok) throw new Error("ответ кодом " + о.status);
                 return о.json();
             })
             .then(function(о){
-                if (!о || !о.ок) throw new Error(о && о.ошибка ? о.ошибка : "приёмник вернул отказ");
+                if (!о || !о.ок) throw new Error(о && о.ошибка ? о.ошибка : "отказ");
+                return о;
+            });
+        }
+
+        function разобрать(о){
+            return (function(){
+                if (!о || !о.ок) throw new Error("пустой ответ");
                 var менялось = false;
 
                 if (о.документы && о.документы.length){
@@ -713,8 +731,7 @@
                     пункты.forEach(function(п){ нарисовать_ссылки(п); нарисовать_файлы(п); });
                     сохранить();
                 }
-            })
-            .catch(function(ош){ не_подтянулось(String(ош.message || ош)); });
+            })();
         }
 
         function пуск(){
