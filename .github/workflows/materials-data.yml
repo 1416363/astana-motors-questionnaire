@@ -14,25 +14,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Забрать присланное из таблицы
+      - name: Забрать присланное и записать, если изменилось
         run: |
-          curl -sL --max-time 60 \
+          set +e
+          curl -sL --max-time 60 --retry 5 --retry-delay 5 --retry-all-errors \
             "https://script.google.com/macros/s/AKfycbxOiycJ5ulXXB_9NyTxBj7ZWLAmy3jaiFgyTh3CTiqXCl847kfNYBjWib1klngjedN-/exec" \
             -o new.json
-          python3 - <<'PY'
+          ЛАД=$?
+          set -e
+          if [ $ЛАД -ne 0 ]; then
+            echo "Таблица не ответила. Прежний файл оставляем как есть."
+            rm -f new.json
+            exit 0
+          fi
+          python3 -c "
           import json, sys
-          д = json.load(open("new.json", encoding="utf-8"))
-          if not д.get("ок"):
-              print("приёмник ответил отказом, файл не меняем")
-              sys.exit(1)
-          json.dump(д, open("materials-data.json", "w", encoding="utf-8"),
-                    ensure_ascii=False, indent=1)
-          print("файлов %s, ссылок %s, вопросов %s" % (д.get("файлов"), д.get("ссылок"), д.get("вопросов")))
-          PY
+          try:
+              d = json.load(open('new.json', encoding='utf-8'))
+          except Exception as e:
+              print('Ответ нечитаем:', e); sys.exit(3)
+          if not d.get('ок'):
+              print('Таблица ответила отказом'); sys.exit(3)
+          json.dump(d, open('materials-data.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+          print('файлов %s, ссылок %s, вопросов %s' % (d.get('файлов'), d.get('ссылок'), d.get('вопросов')))
+          " || { echo "Ответ негоден. Прежний файл оставляем как есть."; rm -f new.json; exit 0; }
           rm -f new.json
-
-      - name: Записать, если изменилось
-        run: |
           git config user.name "Данные запроса материалов"
           git config user.email "actions@github.com"
           git add materials-data.json
